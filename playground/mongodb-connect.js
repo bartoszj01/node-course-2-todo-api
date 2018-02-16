@@ -38,12 +38,19 @@ MongoClient.connect('mongodb://localhost:27017/Users', (err, db)=> {
 	// db.collection('Users').deleteMany({name: 'Bartosz'}).then((result) => {
 	// 	console.log(result);
 	// });
-	db.collection('Users').findOneAndDelete({ _id: new ObjectID('5a781627966a8e2038b51ee4')}).then((result) => {
-		//console.log(result);
-		console.log(JSON.stringify(result, undefined, 2));
-	});
+	// db.collection('Users').findOneAndDelete({ _id: new ObjectID('5a781627966a8e2038b51ee4')}).then((result) => {
+	// 	//console.log(result);
+	// 	console.log(JSON.stringify(result, undefined, 2));
+	// });
 
 	//findOneAndDelete
+
+	//update
+	db.collection('Users').findOneAndUpdate(
+		{_id: new ObjectID('5a868d98c3fb680bc8895cfb')},
+		{$set: {name: 'Veronika'}, $inc: {age: 1}},
+		{returnOriginal: false}).then((result) => {
+			console.log(result)});
 
 	// db.close();
 });
