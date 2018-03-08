@@ -32,22 +32,21 @@ app.get('/todos', (req, res) => {
 
 // GET /todos/12345
 app.get('/todos/:id', (req, res) => {
-	var id = req.params.id;
+  var id = req.params.id;
 
-	if (!ObjectID.isValid(id)) {
-		return res.status(404).send();
-	}
+  if (!ObjectID.isValid(id)) {
+    return res.status(404).send();
+  }
 
-	Todo.findById(id).then((todo) => {
-		if(todo) {
-			return res.status(200).send(JSON.stringify(todo, undefined, 2));
-		}
-		else if (!todo) {
-			return res.status(404).send();
-		}
-	}).catch((e) => {
-		res.status(400).send();
-	});
+  Todo.findById(id).then((todo) => {
+    if (!todo) {
+      return res.status(404).send();
+    }
+
+    res.send({todo});
+  }).catch((e) => {
+    res.status(400).send();
+  });
 });
 
 
